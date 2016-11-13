@@ -66,7 +66,7 @@ size =
 
 count : Int
 count =
-    5000
+    10000
 
 
 bottomLeft : Render.Point
@@ -105,16 +105,7 @@ dotColor =
 
 diceRollsToPoints : List (Int) -> Render.Point -> List Render.Point
 diceRollsToPoints diceRolls point =
-    case diceRolls of
-        firstRoll :: otherRolls ->
-            let
-                nextPoint =
-                    (movePoint firstRoll point)
-            in
-                nextPoint :: (diceRollsToPoints otherRolls nextPoint)
-
-        [] ->
-            []
+    List.scanl movePoint point diceRolls
 
 
 movePoint : Int -> Render.Point -> Render.Point
